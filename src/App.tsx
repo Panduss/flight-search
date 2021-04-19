@@ -1,7 +1,7 @@
 import React from 'react';
 import {Redirect, Route, Router, Switch} from "react-router-dom";
 import {createBrowserHistory} from 'history'
-import HomePage from "./components/Home";
+import HomePage from "./pages/Home";
 
 const history = createBrowserHistory();
 
