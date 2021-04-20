@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useStyles} from "../theme";
 import SearchBar from "../components/SearchBar";
 import {SearchForm} from "../models/SearchForm";
+import FlightList from "../components/FlightList";
 
 function SearchPage(): JSX.Element {
 
@@ -15,6 +16,7 @@ function SearchPage(): JSX.Element {
             <div className={classes.header}>
                 <SearchBar onSubmitForm={(form: SearchForm) => {setForm(form)}}/>
             </div>
+            <FlightList data={form} />
         </div>
     );
 }

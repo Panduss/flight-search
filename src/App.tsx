@@ -4,18 +4,21 @@ import {createBrowserHistory} from 'history'
 import SearchPage from "./pages/SearchPage";
 import {ThemeProvider} from "@material-ui/core/styles";
 import {theme} from "./theme";
+import {StoreProvider} from "./hooks/useStore";
 
 const history = createBrowserHistory();
 
 function App(): JSX.Element {
     return (
         <ThemeProvider theme={theme}>
-            <Router history={history}>
-                <Switch>
-                    <Route path='/home'><SearchPage/></Route>
-                    <Route path='/'><Redirect to="/home"/></Route>
-                </Switch>
-            </Router>
+            <StoreProvider>
+                <Router history={history}>
+                    <Switch>
+                        <Route path='/home'><SearchPage/></Route>
+                        <Route path='/'><Redirect to="/home"/></Route>
+                    </Switch>
+                </Router>
+            </StoreProvider>
         </ThemeProvider>
     );
 }

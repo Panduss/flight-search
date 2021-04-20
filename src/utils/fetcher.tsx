@@ -1,4 +1,5 @@
 import axios, {AxiosError, AxiosResponse, Method} from 'axios';
+const parse = require('parse-link-header');
 
 const defaultEndpoint = 'https://api.schiphol.nl/public-flights';
 
@@ -18,6 +19,15 @@ export const fetcher = async (endpoint: string, body: any, method: Method, param
     } as Headers;
 
     return axios(defaultEndpoint + endpoint, {method: method, headers: headers, params})
-        .then(async (response: AxiosResponse) => response.data)
+        .then(async (response: AxiosResponse) => {
+            if (response.headers.link) {
+                return {
+                    ...response.data,
+                    link: parse(response.headers.link)
+                };
+            } else {
+                return response.data
+            }
+        })
         .catch(async (error: AxiosError) =>  error);
 };
