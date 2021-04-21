@@ -4,16 +4,16 @@ A simple React app to search flights using Schiphol's API
 
 # Disclaimer
 
-I was not able to make the app it work while CORS is enabled in the browser. I get ```Request header field app_id is not allowed by Access-Control-Allow-Headers in preflight response.``` error. I'm in contact with the support team but we weren't able to figure out the problem yet. To run it locally, you must disable same origin policy in Chrome window: 
+I was not able to make the app it work while CORS is enabled in the browser. I get ```Request header field app_id is not allowed by Access-Control-Allow-Headers in preflight response.``` error. I'm in contact with the API's support team but we weren't able to figure out the problem yet. To run it locally, you must disable same origin policy in Chrome window: 
 
 ### Mac
-```open /Applications/Google\ Chrome.app --args --user-data-dir="/var/tmp/Chrome dev session" --disable-web-security```
+```$ open /Applications/Google\ Chrome.app --args --user-data-dir="/var/tmp/Chrome dev session" --disable-web-security```
 
 ### Windows
-```chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security```
+```$ chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security```
 
 ### Linux
-```google-chrome --disable-web-security --user-data-dir="/tmp/someFolderName"```
+```$ google-chrome --disable-web-security --user-data-dir="/tmp/someFolderName"```
 
 # If I had more time
 * Figure out the CORS issue
@@ -24,8 +24,8 @@ I was not able to make the app it work while CORS is enabled in the browser. I g
 
 # Quickstart 🚀
 (Assuming there is a CORS disabled chrome running already)
-* npm install <br>
-* npm start <br>
+```$ npm install``` <br>
+```$ npm start``` <br>
     
 # What packages I choose
 
