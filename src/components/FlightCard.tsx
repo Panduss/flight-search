@@ -34,7 +34,7 @@ function FlightCard(props: Props): JSX.Element {
                 </div>
                 <div className={classes.item} style={{ flex: 3}}>
                     <StyledText content={getDestination(props.flight.route.destinations)} variant={'h2'} align={'left'}/>
-                    <StyledText content={getAirline(props.flight.prefixICAO)} variant={'h3'} align={'left'}/>
+                    <StyledText content={props.flight.flightName + ` (${getAirline(props.flight.prefixICAO)})`} variant={'h3'} align={'left'}/>
                 </div>
             </div>
 
