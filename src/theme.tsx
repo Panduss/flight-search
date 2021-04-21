@@ -13,7 +13,7 @@ declare module "@material-ui/core/styles/createPalette" {
 
 export const theme = createMuiTheme({
     typography: {
-        fontFamily: 'Roboto, sans-serif',
+        fontFamily: 'Cairo, sans-serif',
         h1: {
             fontSize: '1.5rem',
             fontWeight: 600
@@ -43,7 +43,7 @@ export const theme = createMuiTheme({
             main: '#E4DFD7'
         },
         text: {
-            secondary: '#062F5B'
+            primary: '#062F5B'
         }
     }
 });
@@ -66,7 +66,7 @@ export const useStyles = makeStyles({
         backgroundImage: 'url(/img/background.jpg)',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
-        minHeight: '400px',
+        height: '400px',
         position: 'relative',
         top: 0,
         left: 0,
@@ -81,6 +81,10 @@ export const useStyles = makeStyles({
         maxWidth: '80%',
         margin: '0 auto 10px',
         padding: '60px 20px'
+    },
+    divider: {
+        borderTop: '0.5px solid #BCDDBE',
+        width: '100px'
     },
     card: {
         backgroundColor: '#fff',
@@ -101,7 +105,6 @@ export const useStyles = makeStyles({
     item: {
         padding: '5px',
         boxSizing: 'border-box',
-        flex: '1',
         textAlign: 'center'
     },
     field: {
@@ -110,7 +113,8 @@ export const useStyles = makeStyles({
         border: 'none',
         padding: '0 10px',
         boxSizing: 'border-box',
-        width: '100%'
+        width: '100%',
+        fontFamily: 'monospace'
     },
     dropdownContent: {
         position: 'absolute',
@@ -118,7 +122,9 @@ export const useStyles = makeStyles({
         boxSizing: 'border-box',
         padding: '0 20px',
         backgroundColor: '#fff',
-        border: '0.1px solid rgba(0,0,0,0.5)'
+        border: '0.1px solid rgba(0,0,0,0.5)',
+        maxHeight: '300px',
+        overflow: 'scroll'
     },
     listButton: {
         border: 'none',

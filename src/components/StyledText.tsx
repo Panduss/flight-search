@@ -2,7 +2,7 @@ import React from 'react';
 import {Typography} from '@material-ui/core';
 
 interface TextProps {
-    content: string | JSX.Element;
+    content: string | number | JSX.Element;
     variant: 'h1' | 'h2'| 'h3' | 'h4' | 'h5' | 'h6',
     align?: 'left' | 'center' | 'right';
 }

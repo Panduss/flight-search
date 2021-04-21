@@ -25,6 +25,16 @@ export const fetcher = async (endpoint: string, body: any, method: Method, param
                     ...response.data,
                     link: parse(response.headers.link)
                 };
+            } else if (response.status === 204) {
+                if (response.config.url?.endsWith('/airlines')) {
+                    return {
+                        airlines: []
+                    }
+                } else if (response.config.url?.endsWith('/flights')) {
+                    return {
+                        flights: []
+                    }
+                }
             } else {
                 return response.data
             }

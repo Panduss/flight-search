@@ -1,11 +1,11 @@
 export interface Link {
     last: {
-        page: number,
+        page: string,
         rel: string,
         url: string
     },
     next?: {
-        page: number,
+        page: string,
         rel: string,
         url: string
     }

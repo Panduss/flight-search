@@ -8,7 +8,7 @@ export const useBackend = () => {
         SchipholFlightApi: {
             Flights: {
                 useGetFlights: (page: number | null, scheduleDate: string | null, airline: string | null) => {
-                    const fetchKey = scheduleDate ? [Endpoint.Flights, page, scheduleDate, airline] : null;
+                    const fetchKey = scheduleDate || page || airline ? [Endpoint.Flights, page, scheduleDate, airline] : null;
                     return useSWR<FlightsResponse>(fetchKey, (url, page, scheduleDate, airline) => fetcher(url, {}, "GET", {page, scheduleDate, ...(airline && {airline: airline})}), {revalidateOnFocus: false})
                 }
             },

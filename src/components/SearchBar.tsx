@@ -17,27 +17,27 @@ function SearchBar(props: Props): JSX.Element {
 
     const classes = useStyles();
     const today = new Date().toISOString().slice(0, 10);
-    const {data} = useAirlines();
+    const {airlines} = useAirlines();
     const [formState, setFormState] = useState<SearchForm>({scheduleDate: today, airline: null});
     const [searchResults, setSearchResults] = useState<Array<Airline>>([]);
 
     useEffect( () => {
         const searchValue = formState?.airline;
-        if (searchValue && data?.airlines) {
-            const uniqueAirlines = uniqueObjectsSet(data?.airlines)
+        if (searchValue && airlines?.airlines) {
+            const uniqueAirlines = uniqueObjectsSet(airlines?.airlines)
             const results = uniqueAirlines.filter((airline: Airline) => airline.publicName.toLowerCase().startsWith(searchValue));
             setSearchResults(results);
         }
-    }, [data, formState.airline])
+    }, [airlines, formState.airline])
 
     return (
         <div className={classes.box}>
-            <StyledText content={'Find a flight'} align={'left'} variant={'h1'} />
+            <StyledText content={'Find a flight from Schiphol'} align={'left'} variant={'h4'} />
             <div className={classes.container}>
-                <div className={classes.item}>
+                <div className={classes.item} style={{ flex: 1}}>
                     <Datepicker onSelectDate={(date: string) => {setFormState({...formState, scheduleDate: date})}}/>
                 </div>
-                <div className={classes.item}>
+                <div className={classes.item} style={{ flex: 1}}>
                     <StyledInput
                         label="Filter on airlines"
                         onValueChange={(airline: string) => {setFormState({...formState, airline: airline})}}
@@ -46,8 +46,8 @@ function SearchBar(props: Props): JSX.Element {
                 </div>
             </div>
             <div className={classes.container}>
-                <div className={classes.item}>
-                    <Button onClick={() => props.onSubmitForm(formState)} variant='contained' color='secondary'>Search</Button>
+                <div className={classes.item} style={{ flex: 1}}>
+                    <Button onClick={() => props.onSubmitForm(formState)} variant='contained' color='primary'>Search</Button>
                 </div>
             </div>
         </div>

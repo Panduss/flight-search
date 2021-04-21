@@ -15,13 +15,13 @@ const useAirlines = () => {
                 setState((prev) => ({airlines: [...prev.airlines || [], ...data.airlines.filter(airline => airline.icao)]}));
             }
             if (data.link) {
-                if (data.link.next) setPage(data.link.next.page);
-                if (!data.link.next && data.link.last) setPage(data.link.last.page);
+                if (data.link.next) setPage(parseInt(data.link.next.page, 10));
+                if (!data.link.next && data.link.last) setPage(parseInt(data.link.last.page, 10));
             }
         }
     }, [setState, data])
 
-    return {data: state, error}
+    return {airlines: state, error}
 };
 
 export default useAirlines

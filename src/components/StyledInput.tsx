@@ -32,7 +32,7 @@ export default function StyledInput(props: FieldProps): JSX.Element {
                 (value && props.airlines && props.airlines.length !== 0) &&
                 <div className={classes.dropdownContent}>{
                     props.airlines.map((airline: Airline) => (
-                        <div key={airline.publicName}>
+                        <div key={airline.icao}>
                             <button className={classes.listButton} type="button" value={airline.icao} onClick={handleChange}>{airline.publicName + ` (${airline.icao})`}</button>
                         </div>
                     ))}
