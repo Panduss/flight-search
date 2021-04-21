@@ -23,7 +23,7 @@ I was not able to make the app it work while CORS is enabled in the browser. I g
 * Implement flight tracking
 
 # Quickstart 🚀
-(Assuming there is a CORS disabled chrome running already)
+(Assuming there is a CORS disabled chrome running already) <br>
 ```$ npm install``` <br>
 ```$ npm start``` <br>
     
