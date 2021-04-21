@@ -1,46 +1,36 @@
-# Getting Started with Create React App
+# Flight-search <br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple React app to search flights using Schiphol's API
 
-## Available Scripts
+# Disclaimer
 
-In the project directory, you can run:
+I was not able to make the app it work while CORS is enabled in the browser. I get ```Request header field app_id is not allowed by Access-Control-Allow-Headers in preflight response.``` error. I'm in contact with the support team but we weren't able to figure out the problem yet. To run it locally, you must disable same origin policy in Chrome window: 
 
-### `yarn start`
+### Mac
+```open /Applications/Google\ Chrome.app --args --user-data-dir="/var/tmp/Chrome dev session" --disable-web-security```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Windows
+```chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Linux
+```google-chrome --disable-web-security --user-data-dir="/tmp/someFolderName"```
 
-### `yarn test`
+# If I had more time
+* Figure out the CORS issue
+* Extend the date filter with time
+* Remove Material ui completely (tried to use as little as possible but I still use it for creating the providing the theme for example)
+* Implement resetting search fields
+* Implement flight tracking
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Quickstart 🚀
+(Assuming there is a CORS disabled chrome running already)
+* npm install <br>
+* npm start <br>
+    
+# What packages I choose
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+  ### SWR
+  Because it is fast due to the fact that first it returns the cached data before it revalidates the results.
+   
+  ### Axios
+  Mostly because of the automatic data transformation. 
