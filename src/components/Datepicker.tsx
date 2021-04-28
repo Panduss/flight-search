@@ -7,9 +7,10 @@ interface Props {
 }
 
 function Datepicker(props: Props): JSX.Element {
+
     const today = new Date().toISOString().substr(0, 10);
     const classes = useStyles();
-    const [startDate, setStartDate] = useState(today);
+    const [startDate, setStartDate] = useState<string>(today);
 
     const handleChange = (event: React.FormEvent<EventTarget>) => {
         let target = event.target as HTMLInputElement;

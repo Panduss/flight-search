@@ -19,30 +19,23 @@ function FlightList(props: Props): JSX.Element | null {
     const [moreResults, setMoreResult] = useState<boolean>(false);
     const [flights, setFlights] = useState<Array<Flight>>([]);
     const {data, error} = SchipholFlightApi.Flights.useGetFlights(page, props.form.scheduleDate, props.form.airline);
+    const nextPage = data?.link?.next?.page || data?.link?.last?.page;
 
     useEffect(() => {
-        if(data) {
-            if(data.flights) {
-                const flights = data.flights.filter(flight => flight.prefixICAO);
-                if(page !== 0) setFlights((prev) => ([...prev || [], ...flights]));
-                else setFlights(() => (flights));
-            }
-            if(data.link) {
-                if(data.link.next) setMoreResult(() => true);
-                else setMoreResult(() => false);
-            }
-        }
-    }, [data, page])
+        setPage(() => props.form.page)
+    }, [props])
+
+    useEffect(() => {
+        const flights = data?.flights.filter(flight => flight.prefixICAO) || [];
+        flights && page === 0 ? setFlights(() => (flights)) : setFlights((prev) => ([...prev || [], ...flights]));
+    }, [data?.flights, page])
+
+    useEffect(() => {
+        nextPage ? setMoreResult(() => true) : setMoreResult(() => false);
+    }, [nextPage])
 
     const loadMoreResults = () => {
-        if(data && data.link) {
-            if(data.link.next) {
-                setPage(parseInt(data.link.next.page, 10));
-            }
-            if(!data.link.next && data.link.last) {
-                setPage(parseInt(data.link.last.page, 10));
-            }
-        }
+        if(nextPage) setPage(parseInt(nextPage, 10));
     }
 
     if(error) {

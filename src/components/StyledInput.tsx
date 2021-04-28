@@ -11,7 +11,7 @@ interface FieldProps {
 export default function StyledInput(props: FieldProps): JSX.Element {
 
     const classes = useStyles();
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState<string>('');
 
     const handleChange = (event: React.FormEvent<EventTarget>) => {
         let target = event.target as HTMLInputElement;

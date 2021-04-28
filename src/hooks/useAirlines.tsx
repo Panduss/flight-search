@@ -1,27 +1,37 @@
-import {useBackend} from './useBackend';
-import {useState, useEffect} from 'react';
-import {useStore} from "./useStore";
+import React, {createContext, useContext, useEffect, useState} from "react";
+import {Airline} from "../models/Airline";
+import {useBackend} from "./useBackend";
 
-const useAirlines = () => {
+interface AirlineContextInterface {
+    airlines: Array<Airline>;
+    error: string;
+}
+
+export const AirlineContext = createContext({} as AirlineContextInterface)
+
+export const AirlineProvider = ({children}: { children: React.ReactNode }): JSX.Element => {
 
     const {SchipholFlightApi} = useBackend();
-    const {state, setState} = useStore();
     const [page, setPage] = useState<number|null>(0)
+    const [airlines, setAirlines] = useState<Array<Airline>>([])
     const {data, error} = SchipholFlightApi.Airlines.useGetAirlines(page);
 
     useEffect( () => {
-        if (data) {
-            if (data.airlines) {
-                setState((prev) => ({airlines: [...prev.airlines || [], ...data.airlines.filter(airline => airline.icao)]}));
-            }
-            if (data.link) {
-                if (data.link.next) setPage(parseInt(data.link.next.page, 10));
-                if (!data.link.next && data.link.last) setPage(parseInt(data.link.last.page, 10));
-            }
-        }
-    }, [setState, data])
+        if(data?.airlines) setAirlines((prev: Array<Airline>) => ([...prev || [], ...data?.airlines.filter(airline => airline.icao)]));
+    }, [data?.airlines])
 
-    return {airlines: state, error}
+    useEffect( () => {
+        if (data?.link?.next) setPage(parseInt(data.link.next.page, 10));
+        if (!data?.link?.next && data?.link?.last) setPage(parseInt(data.link.last.page, 10));
+    }, [data?.link])
+
+    return (
+        <AirlineContext.Provider value={{airlines, error}}>
+            {children}
+        </AirlineContext.Provider>
+    );
 };
 
-export default useAirlines
+export const useAirlines = () => {
+    return useContext(AirlineContext);
+};

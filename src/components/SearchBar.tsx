@@ -6,7 +6,7 @@ import {useStyles} from "../theme";
 import StyledInput from "../components/StyledInput";
 import {Airline} from "../models/Airline";
 import {SearchForm} from "../models/SearchForm";
-import useAirlines from "../hooks/useAirlines";
+import {useAirlines} from "../hooks/useAirlines";
 import {uniqueObjectsSet} from "../utils/uniqueArrayOfObjects";
 
 interface Props {
@@ -18,17 +18,22 @@ function SearchBar(props: Props): JSX.Element {
     const classes = useStyles();
     const today = new Date().toISOString().slice(0, 10);
     const {airlines} = useAirlines();
-    const [formState, setFormState] = useState<SearchForm>({scheduleDate: today, airline: null});
+    const [page, setPage] = useState<number>(0);
+    const [formState, setFormState] = useState<SearchForm>({page: page, scheduleDate: today, airline: null});
     const [searchResults, setSearchResults] = useState<Array<Airline>>([]);
+    const searchValue = formState?.airline;
 
     useEffect(() => {
-        const searchValue = formState?.airline;
-        if(searchValue && airlines?.airlines) {
-            const uniqueAirlines = uniqueObjectsSet(airlines?.airlines)
+        if(searchValue && airlines) {
+            const uniqueAirlines = uniqueObjectsSet(airlines)
             const results = uniqueAirlines.filter((airline: Airline) => airline.publicName.toLowerCase().startsWith(searchValue));
             setSearchResults(results);
         }
-    }, [airlines, formState.airline])
+    }, [searchValue, airlines])
+
+    useEffect(() => {
+        setPage(() => 0);
+    }, [formState])
 
     return (
         <div className={classes.box}>
