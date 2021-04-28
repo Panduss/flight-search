@@ -2,8 +2,9 @@ import React from "react";
 import {useStyles} from "../theme";
 import {Flight} from "../models/Flight";
 import StyledText from "./StyledText";
-import {useStore} from "../hooks/useStore";
 import {AirportCodes, airportCodes} from '../utils/airportCodes';
+import {useAirlines} from "../hooks/useAirlines";
+import { Airline } from "../models/Airline";
 
 export interface Props {
     flight: Flight;
@@ -11,15 +12,16 @@ export interface Props {
 }
 
 function FlightCard(props: Props): JSX.Element {
+
     const classes = useStyles();
-    const { state } = useStore();
+    const { airlines } = useAirlines();
 
     const getDestination = (destinations: Array<string>) => {
         return airportCodes.find((airportCode: AirportCodes) => airportCode.iata === destinations[destinations.length - 1])?.name || destinations[destinations.length - 1];
     }
 
     const getAirline = (icao: string) => {
-        return state.airlines?.find(airline => airline.icao === icao)?.publicName || icao;
+        return airlines.find((airline: Airline) => airline.icao === icao)?.publicName || icao;
     }
 
     return (

@@ -6,7 +6,7 @@ import FlightList from "../components/FlightList";
 
 function SearchPage(): JSX.Element {
 
-    const [form, setForm] = useState<SearchForm>({scheduleDate: null, airline: null});
+    const [form, setForm] = useState<SearchForm>({page: null, scheduleDate: null, airline: null});
     const classes = useStyles();
 
     return (
